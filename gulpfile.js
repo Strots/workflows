@@ -8,8 +8,8 @@ var gulp = require('gulp'),
 var coffeeSources = ['components/coffee/tagline.coffee'];
 var jsSources = [
   'components/scripts/rclick.js',
-  'components/scripts/tagline.js',
   'components/scripts/pixgrid.js',
+  'components/scripts/tagline.js',
   'components/scripts/template.js'
 ];
 var sassSources = ['components/sass/style.scss'];
@@ -37,6 +37,12 @@ gulp.task('compass', function(){
     }))
     .on('error', gutil.log)
     .pipe(gulp.dest('builds/development/css'))
+});
+
+gulp.task('watch', function(){
+  gulp.watch(coffeeSources, ['coffee']);
+  gulp.watch(jsSources, ['js']);
+  gulp.watch('components/sass/*.scss', ['compass']);
 });
 
 gulp.task('default', ['coffee','js', 'compass']);
